@@ -101,10 +101,16 @@ pvc:
   storage_class: nfs-app
   storage_size: 100Mi
 
-volumes:
+# Additional volumes on the output Deployment definition.
+volumes: 
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: pv-claim-helm
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
   - name: persistent-storage
@@ -112,6 +118,8 @@ volumeMounts:
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
+
+
 
 nodeSelector: {}
 
