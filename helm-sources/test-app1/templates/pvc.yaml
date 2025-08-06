@@ -6,7 +6,7 @@ metadata:
     nfs.io/storage-path: test-helm-app
   name: pv-claim-helm
   labels:
-    {{- include "first-app.labels" . | nindent 4 }}
+    {{- include "test-app1.labels" . | nindent 4 }}
 spec:
   accessModes:
     - ReadWriteMany
