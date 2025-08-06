@@ -30,7 +30,6 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
-
 # This is for setting Kubernetes Annotations to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 podAnnotations: {}
@@ -98,16 +97,18 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+pvc:
+  storage_class: nfs-app
+  storage_size: 100Mi
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
-
+volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: pv-claim-helm
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
+volumeMounts:
+  - name: persistent-storage
+    mountPath: "/usr/share/nginx/html"
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
