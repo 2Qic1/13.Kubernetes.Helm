@@ -1,0 +1,24 @@
+global:
+  storageClass: "nfs-app"  # Укажите ваш StorageClass
+
+wordpress:
+  username: "admin"
+  password: "admin"
+  email: "admin@k8s-4.sa"
+  blogName: "K8s-4 WordPress"
+  persistence:
+    size: 2Gi
+
+ingress:
+  enabled: true
+  hostname: "wordpress.k8s-4.sa"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  tls: false  # Для продакшна включите TLS
+
+mariadb:
+  enabled: true
+  auth:
+    rootPassword: "mariadb-root-pass123"
+    password: "wordpress-db-pass123"
+    database: "wordpress"

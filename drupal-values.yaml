@@ -1,0 +1,40 @@
+drupalUsername: admin
+drupalPassword: admin
+
+persistence:
+  storageClass: nfs-client
+  accessModes:
+    - ReadWriteMany
+  size: 1Gi
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: drupal.k8s-3.sa
+
+postgresql:
+  primary:
+    persistence:
+      storageClass: nfs-client
+      accessModes:
+        - ReadWriteMany
+      size: 1Gi
+  auth:
+    password: admin
+
+probes:
+  liveness:
+    enabled: true
+  readiness:
+    enabled: true
+  startup:
+    enabled: true
+
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 500m
+
